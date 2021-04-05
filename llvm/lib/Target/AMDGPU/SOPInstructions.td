@@ -1147,10 +1147,9 @@ defm S_CBRANCH_CDBGUSER : SOPP_With_Relaxation <
 } // End isTerminator = 1
 
 let hasSideEffects = 1 in {
-def S_BARRIER : SOPP <0x0000000a, (ins), "s_barrier",
-  [(int_amdgcn_s_barrier)]> {
+def S_BARRIER : SOPP <0x0000000a, (ins i16imm:$simm16), "s_barrier $simm16",
+  [(int_amdgcn_s_barrier timm:$simm16)]> {
   let SchedRW = [WriteBarrier];
-  let simm16 = 0;
   let isConvergent = 1;
 }
 
